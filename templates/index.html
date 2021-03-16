@@ -1,0 +1,49 @@
+{% extends 'template.html' %}
+{% block body %}
+<!-- Start main panel -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-5 main-panel">
+            <div class="panel-tabs">
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in component-box active" id="write_text">
+                        <form action="/analyze_text" method="POST">
+                            <div class="input-area">
+                                <label>2. Enter Your Text</label>
+                                <textarea name="text_input_text" id="text_input_text" cols="30" rows="4" placeholder="Type your Product name or text  and get category..." style = "height: 65px;" required></textarea>
+                            </div> <!-- .input-area -->
+                            <div class="input-area">
+                                <label>3. Select Classifier</label>
+                                <div class="radio-group">
+                                    <input type="radio" name="text_classifier" id="text_ridge_model" value="ridge_model" checked />
+                                    <label for="text_ridge_model">Ridge Model</label>
+                                    <input type="radio" name="text_classifier" id="text_random_forest" value="random_forest_model" />
+                                    <label for="text_random_forest">Random Forest</label>
+                                    <input type="radio" name="text_classifier" id="text_kneighbors_model" value="kneighbors_model" />
+                                    <label for="text_kneighbors_model">Kneighbors Model</label>
+                                </div> <!-- .radio-group -->
+                            </div> <!-- .input-area -->
+                            <input type="submit" value="Get Category" />
+                        </form>
+                    </div> <!-- #write_text -->
+                </div> <!-- .tab-content -->
+            </div> <!-- .panel-tabs -->
+        </div> <!-- .main-panel -->
+        {% if text_category %}
+        <div class="output-panel col-md-7" style="height: calc(60% - 30px)">
+            <div class="component-box summary-text" style="height: calc(60% - 30px)">
+                <label>Text Category</label>
+                <div class="category">
+					<span class="green active">{{text_category }}</span>
+                </div> <!-- .category -->
+            </div>
+        </div> <!-- .output-panel -->
+        {% else %}
+        <div class="welcome-panel col-md-7">
+            <img src="{{ url_for('static', filename='images/home-bg.svg') }}" alt="Welcome Screen" />
+        </div> <!-- .output-panel -->
+        {% endif %}
+    </div> <!-- .row -->
+</div>
+<!-- End main panel -->
+{% endblock %}
