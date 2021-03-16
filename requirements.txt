@@ -1,7 +1,7 @@
+pickle5
 flask
 gunicorn
 sklearn
-pickle
 pandas
 numpy
 nltk
